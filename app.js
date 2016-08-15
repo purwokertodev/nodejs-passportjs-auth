@@ -55,7 +55,7 @@ productDao.init();
 var user = new User(userDao);
 userDao.init();
 
-app.get('/', product.showAll.bind(product));
+app.get('/', product.showAllRest.bind(product));
 app.post('/addproduct', product.addProduct.bind(product));
 app.post('/saveproductfinish', product.saveProductFinish.bind(product));
 
