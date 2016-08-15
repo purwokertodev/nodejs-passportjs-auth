@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  h1 #{title}
+  br
+
+  form(action="/saveproductfinish", method="post")
+    table.table.table-striped.table-bordered
+      tr
+        td Name
+        td Description
+        td Price
+        td Created At
+        td Active
+      if (typeof productList === "undefined")
+        tr
+          td
+      else
+        each p in productList
+          tr
+            td #{p.name}
+            td #{p.description}
+            td #{p.price}
+            - var date  = new Date(p.createdAt);
+            - var day   = date.getDate();
+            - var month = date.getMonth() + 1;
+            - var year  = date.getFullYear();
+            td #{month + "/" + day + "/" + year}
+            td
+              input(type="checkbox", name="#{p.id}", value="#{!p.active}", checked=p.active)
+    button.btn(type="submit") Update Employee
+  hr
+  form.well(action="/addproduct", method="post")
+    label Name :
+    input(name="name", type="textbox")
+    label Description :
+    input(name="description", type="textbox")
+    label Price :
+    input(name="price", type="textbox")
+    br
+    button.btn(type="submit") Add item
